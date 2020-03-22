@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Asset Table</title>
+	<style>
+	table {
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	th, td {
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {background-color: #f2f2f2;}
+	</style>
+    </head>
+    <body>
+	<table>
+	  <thead><tr><th>Hostname</th><th>Description</th><th>MAC Address</th><th>MAC Vendor</th></tr></thead>
+		<tbody>
+		{% for i in asset_info %}
+    	  	<tr><td> {{ i['Hostname'] }}</td><td> {{ i['Description'] }}</td><td><a href="https://api.macvendors.com/{{ i['MAC_address'] }}">{{ i['MAC_address'] }}</a></td><td> {{ i['MAC_vendor'] }}</td></tr>
+		{% endfor %}
+        	</tbody>
+	</table>
+    </body>
+</html>
