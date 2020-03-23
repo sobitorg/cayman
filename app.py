@@ -11,7 +11,8 @@ from flask import render_template
 # connect to MongoDB, change the << MONGODB URL >> to reflect your own connection string
 client = MongoClient('mongodb://127.0.01:27017')
 
-db=client.test
+db = client.test        #select the database
+assets = db.assets      #select the collection
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017"
@@ -21,7 +22,9 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    #assetcount = db.assets.countDocuments({})
+    assetcount = db.assets.count_documents({})
+    return render_template("index.html", assetcount=assetcount)
 
 @app.route('/assets')
 def assets():
